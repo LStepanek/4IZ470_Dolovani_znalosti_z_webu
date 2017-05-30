@@ -9,7 +9,7 @@
 #### zadávám, kolik prvních "my_proportion" * 100 procent každého korpusu
 #### bude zpracováno pro účely sestavení vektoru s větami ---------------------
 
-my_proportion <- 0.01    ## zřejmě je 0 <= my_proportion <= 1
+my_proportion <- 0.005    ## zřejmě je 0 <= my_proportion <= 1
 
 
 #### -------------------------------------------------------------------------
