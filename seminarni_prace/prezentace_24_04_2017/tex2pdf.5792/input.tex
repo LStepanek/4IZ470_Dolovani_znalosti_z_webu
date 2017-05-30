@@ -1,0 +1,286 @@
+\documentclass[ignorenonframetext,t]{beamer}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\newif\ifbibliography
+\hypersetup{
+            pdfauthor={Lubomír Štěpánek},
+            pdfborder={0 0 0},
+            breaklinks=true}
+
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+
+\AtBeginPart{
+  \let\insertpartnumber\relax
+  \let\partname\relax
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \let\insertsubsectionnumber\relax
+  \let\subsectionname\relax
+  \frame{\subsectionpage}
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+\usetheme{Madrid}
+
+% článková matematická notace
+\usefonttheme[onlymath]{serif}
+
+% loaduju některé balíčky
+\usepackage{siunitx}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{amsfonts}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage[czech]{babel}
+\usepackage{blindtext}
+\usepackage{scrextend}
+
+% změna velikosti fontu
+\newcommand\reduceFontSize{\fontsize{8}{10}\selectfont}
+
+% bude se hodit
+\newcommand\floor[1]{\lfloor#1\rfloor}
+\newcommand\ceil[1]{\lceil#1\rceil}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\newcounter{savedenum}
+\newcommand*{\saveenum}{\setcounter{savedenum}{\theenumi}}
+\newcommand*{\resume}{\setcounter{enumi}{\thesavedenum}}
+
+\defbeamertemplate*{footline}{my footline}
+{
+    \ifnum \insertpagenumber=1
+		\leavevmode%
+		\hbox{%
+			\pgfsetfillopacity{1}\begin{beamercolorbox}[wd=.23\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+			  \usebeamerfont{author in head/foot}\pgfsetfillopacity{1}
+			\end{beamercolorbox}%
+			\pgfsetfillopacity{1}\begin{beamercolorbox}[wd=.54\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+			  \usebeamerfont{title in head/foot}\pgfsetfillopacity{1}
+			\end{beamercolorbox}%
+			\pgfsetfillopacity{1}\begin{beamercolorbox}[wd=.23\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+			  \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+			\end{beamercolorbox}
+		  }%
+		\vskip0pt%
+    \else
+		\leavevmode%
+		\hbox{%
+			\pgfsetfillopacity{1}\begin{beamercolorbox}[wd=.23\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+			  \usebeamerfont{author in head/foot}\pgfsetfillopacity{1}Lubomír Štěpánek
+			\end{beamercolorbox}%
+			\pgfsetfillopacity{1}\begin{beamercolorbox}[wd=.54\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+			  \usebeamerfont{title in head/foot}\pgfsetfillopacity{1}Aplikace \texttt{the\_next\_word\_prediction}
+			\end{beamercolorbox}%
+			\pgfsetfillopacity{1}\begin{beamercolorbox}[wd=.16\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}%
+			  \usebeamerfont{date in head/foot}\pgfsetfillopacity{1}\insertshortdate{}
+			\end{beamercolorbox}%
+			\pgfsetfillopacity{1}\begin{beamercolorbox}[wd=.07\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%  
+			  \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+			\end{beamercolorbox}
+		  }%
+		\vskip0pt%
+    \fi
+}
+
+\setbeamertemplate{footline}[my footline]
+
+\title{Aplikace\\
+\texttt{the\_next\_word\_prediction}}
+\subtitle{4IZ470 Dolování znalostí z webu}
+\author{Lubomír Štěpánek}
+\institute{Katedra biomedicínské informatiky\\
+Fakulta biomedicínského inženýrství\\
+České vysoké učení technické v Praze\\
+---\\
+Centrum podpory multimediálních forem výuky\\
+Oddělení výpočetní techniky\\
+1. lékařská fakulta\\
+Univerzita Karlova v Praze}
+\date{24. dubna 2017}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Pipeline projektu}
+
+\begin{enumerate}
+    \item získání textového korpusu
+    \begin{itemize}
+      \item včetně jeho obohacení vlastním webscrapovaným textem
+    \end{itemize}
+    \item processing textových dat korpusu
+    \item $n$-gramming nad korpusem pro $n \in \{ 2, 3, 4\}$
+    \begin{itemize}
+      \item včetně Kneserova-Neyova smoothingu
+    \end{itemize}
+    \item implementace koncové webové aplikace predikující $i$-té slovo, které nejpravděpodobněji následuje uživatelem zadané $(i - 1)$-členné slovní spojení, kde $i \in \{ 1, 2, 3\}$
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Získání textového korpusu}
+
+\begin{itemize}
+\tightlist
+\item
+  použita část známých HC korpusů (\textit{Helsinki corpora})
+  různorodých anglických textů
+\item
+  je dostupná online na
+
+  \begin{center}
+  \href{http://www.helsinki.fi/varieng/CoRD/corpora/HelsinkiCorpus/}{\framebox{http://www.helsinki.fi/varieng/CoRD/corpora/HelsinkiCorpus/}}
+  \end{center}
+\item
+  pracovní korpus byl konkrétně sestaven
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ze zpravodajských příspěvků
+  \item
+    z tweetů
+  \item
+    z blogerských textů
+  \end{itemize}
+\item
+  dohromady \textgreater{} 3 miliony anglických vět
+\item
+  v plánu obohacení vlastním webscrapingem částí anglicky psaného webu
+
+  \begin{itemize}
+  \tightlist
+  \item
+    twitteru prostřednictvím balíčku \texttt{twitteR} jazyka \textsf{R}
+  \item
+    Wikipedie, protože nabízí statické HTML
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Processing textových dat korpusu}
+
+\begin{itemize}
+\tightlist
+\item
+  odstranění větné interpunkce
+\item
+  odtranění stop slov
+
+  \begin{itemize}
+  \tightlist
+  \item
+    existují slovníky anglických stop slov
+  \end{itemize}
+\item
+  odstranění vulgárních, nevhodných slov
+
+  \begin{itemize}
+  \tightlist
+  \item
+    rovněž pomocí existujících slovníků
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{\(n\)-gramming nad korpusem}
+
+\begin{itemize}
+\tightlist
+\item
+  jde o vytvoření ``slovníku'' \(n\)-členných slovních spojení pro
+  \(n \in \{ 2, 3, 4\}\)
+\item
+  např. \{i like\}, \{how are you\}, \{what about your own\} apod.
+\item
+  smyslem \(n\)-grammingu je nakonec predikce \(i\)-tého slova, které
+  nejpravděpodobněji následuje uživatelem zadané \((i - 1)\)-členné
+  slovní spojení, kde \(i \in \{ 1, 2, 3\}\)
+\item
+  v plánu Kneserovo-Neyovo vyhlazování, jeho principem je provážení
+  pravděpodobností \(n\)-gramů pro nízká a vysoká \(n\); momentálně
+  implementován MAP
+  (\underline{M}aximum-\underline{A}posteriori-\underline{P}robability)
+  odhad, tedy slovo \(w_{i}^{*}\) následující frázi
+  \(w_{i-1} \ldots w_{1}\) takové, že
+\end{itemize}
+
+\[w_{i}^{*} = \argmax\limits_{\forall w_{i}} \{ p( w_{i}^{*} w_{i-1} \ldots w_{1} \mid w_{i-1} \ldots w_{1}) \}\]
+
+\end{frame}
+
+\begin{frame}{Koncová webová aplikace}
+
+\begin{itemize}
+\tightlist
+\item
+  implementována v \textsf{R}, uložena na \textsf{R}-serveru 1. lékařské
+  fakulty UK
+\item
+  beta verze dostupná online na
+
+  \begin{center}
+  \href{http://shiny.statest.cz:3838/the_next_word_prediction/}{\framebox{http://shiny.statest.cz:3838/the\_next\_word\_prediction/}}
+  \end{center}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{}
+
+\vspace{+3.0cm}\begin{block}{\centering Děkuji za pozornost!}
+  \center
+  \begin{tabular}{l@{}l@{}l}
+    &\href{mailto:lubomir.stepanek@fbmi.cvut.cz}{lubomir.stepanek@fbmi.cvut.cz} \\
+    &\href{mailto:lubomir.stepanek@lf1.cuni.cz}{lubomir.stepanek@lf1.cuni.cz}
+  \end{tabular}
+\end{block}
+
+\end{frame}
+
+\end{document}

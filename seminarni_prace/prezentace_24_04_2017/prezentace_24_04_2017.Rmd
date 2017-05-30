@@ -1,0 +1,104 @@
+---
+title: |
+ | Aplikace
+ | \texttt{the\_next\_word\_prediction}
+subtitle: "4IZ470 Dolování znalostí z webu"
+author: "Lubomír Štěpánek"
+institute: |
+ | Katedra biomedicínské informatiky
+ | Fakulta biomedicínského inženýrství
+ | České vysoké učení technické v Praze
+ | ---
+ | Centrum podpory multimediálních forem výuky
+ | Oddělení výpočetní techniky
+ | 1. lékařská fakulta
+ | Univerzita Karlova v Praze
+date: "24\\. dubna 2017"
+classoption: t
+output:
+ beamer_presentation:
+  fig_caption: false
+  includes:
+   in_header: my_styles.tex
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Pipeline projektu
+
+\begin{enumerate}
+    \item získání textového korpusu
+    \begin{itemize}
+      \item včetně jeho obohacení vlastním webscrapovaným textem
+    \end{itemize}
+    \item processing textových dat korpusu
+    \item $n$-gramming nad korpusem pro $n \in \{ 2, 3, 4\}$
+    \begin{itemize}
+      \item včetně Kneserova-Neyova smoothingu
+    \end{itemize}
+    \item implementace koncové webové aplikace predikující $i$-té slovo, které nejpravděpodobněji následuje uživatelem zadané $(i - 1)$-členné slovní spojení, kde $i \in \{ 1, 2, 3\}$
+\end{enumerate}
+
+
+## Získání textového korpusu
+
+- použita část známých HC korpusů (\textit{Helsinki corpora}) různorodých anglických textů
+- je dostupná online na
+\begin{center}
+\href{http://www.helsinki.fi/varieng/CoRD/corpora/HelsinkiCorpus/}{\framebox{http://www.helsinki.fi/varieng/CoRD/corpora/HelsinkiCorpus/}}
+\end{center}
+- pracovní korpus byl konkrétně sestaven
+    - ze zpravodajských příspěvků
+    - z tweetů
+    - z blogerských textů
+- dohromady > 3 miliony anglických vět
+- v plánu obohacení vlastním webscrapingem částí anglicky psaného webu
+    - twitteru prostřednictvím balíčku \texttt{twitteR} jazyka \textsf{R}
+    - Wikipedie, protože nabízí statické HTML
+
+
+## Processing textových dat korpusu
+
+- odstranění větné interpunkce 
+- odtranění stop slov
+    - existují slovníky anglických stop slov
+- odstranění vulgárních, nevhodných slov
+    - rovněž pomocí existujících slovníků
+
+
+## $n$-gramming nad korpusem
+
+- jde o vytvoření "slovníku" $n$-členných slovních spojení pro $n \in \{ 2, 3, 4\}$
+- např. \{i like\}, \{how are you\}, \{what about your own\} apod.
+- smyslem $n$-grammingu je nakonec predikce $i$-tého slova, které nejpravděpodobněji následuje uživatelem zadané $(i - 1)$-členné slovní spojení, kde $i \in \{ 1, 2, 3\}$
+- v plánu Kneserovo-Neyovo vyhlazování, jeho principem je provážení pravděpodobností $n$-gramů pro nízká a vysoká $n$; momentálně implementován MAP (\underline{M}aximum-\underline{A}posteriori-\underline{P}robability) odhad, tedy slovo $w_{i}^{*}$ následující frázi $w_{i-1} \ldots w_{1}$ takové, že
+$$w_{i}^{*} = \argmax\limits_{\forall w_{i}} \{ \hat{p}( w_{i}^{*} w_{i-1} \ldots w_{1} \mid w_{i-1} \ldots w_{1}) \}$$
+
+
+## Koncová webová aplikace
+
+- implementována v \textsf{R}, uložena na \textsf{R}-serveru 1. lékařské fakulty UK
+- beta verze dostupná online na
+\begin{center}
+\href{http://shiny.statest.cz:3838/the_next_word_prediction/}{\framebox{http://shiny.statest.cz:3838/the\_next\_word\_prediction/}}
+\end{center}
+
+
+
+## 
+
+\vspace{+3.0cm}
+\begin{block}{\centering Děkuji za pozornost!}
+  \center
+  \begin{tabular}{l@{}l@{}l}
+    &\href{mailto:lubomir.stepanek@fbmi.cvut.cz}{lubomir.stepanek@fbmi.cvut.cz} \\
+    &\href{mailto:lubomir.stepanek@lf1.cuni.cz}{lubomir.stepanek@lf1.cuni.cz}
+  \end{tabular}
+\end{block}
+
+
+
+
