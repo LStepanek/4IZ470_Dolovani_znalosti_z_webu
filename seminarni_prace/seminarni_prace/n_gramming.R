@@ -18,8 +18,8 @@ for(n in 2:5){
     assign(
         paste(
             setNames(
-                c("bi", "tri", "quadri", "penta"),
-                c(2, 3, 4, 5)
+                c("bi", "tri", "quadri", "penta", "hexa", "hepta"),
+                c(2, 3, 4, 5, 6, 7)
             )[as.character(n)],
             "grams",
             sep = "_"
@@ -50,26 +50,106 @@ for(n in 2:5){
     n_grams <- get(
         paste(
             setNames(
-                c("bi", "tri", "quadri", "penta"),
-                c(2, 3, 4, 5)
+                c("bi", "tri", "quadri", "penta", "hexa", "hepta"),
+                c(2, 3, 4, 5, 6, 7)
             )[as.character(n)],
             "grams",
             sep = "_"
         )
     )
     
+    my_table <- table(n_grams)
     
+    assign(
+        paste(
+            setNames(
+                c("bi", "tri", "quadri", "penta", "hexa", "hepta"),
+                c(2, 3, 4, 5, 6, 7)
+            )[as.character(n)],
+            "grams_table",
+            sep = "_"
+        ),
+        data.frame(
+            "n_gram" = names(my_table[order(names(my_table))]),
+            "subphrase" = gsub(
+                "(.*) (.*)",
+                "\\1",
+                names(my_table[order(names(my_table))])
+            ),
+            "last_word" = gsub(
+                "(.*) (.*)",
+                "\\2",
+                names(my_table[order(names(my_table))])
+            ),
+            "frequency" = as.numeric(
+                unname(my_table[order(names(my_table))])
+            ),
+            stringsAsFactors = FALSE
+        )
+    )
     
-    
-    
-    
+    flush.console()
+    print(
+        paste(
+            "Tabulka pro ",
+            n,
+            "-gramy je hotová.",
+            sep = ""
+        )
+    )
     
 }
 
 
+#### --------------------------------------------------------------------------
 
+###############################################################################
 
+#### ukládám tabulky n-gramů --------------------------------------------------
 
+setwd(paste(mother_working_directory, "vystupy", sep = "/"))
+
+for(n in 2:5){
+    
+    n_grams_table <- get(
+        paste(
+            setNames(
+                c("bi", "tri", "quadri", "penta", "hexa", "hepta"),
+                c(2, 3, 4, 5, 6, 7)
+            )[as.character(n)],
+            "grams_table",
+            sep = "_"
+        )
+    )
+    
+    write.table(
+        x = n_grams_table,
+        file = paste(
+            setNames(
+                c("bi", "tri", "quadri", "penta", "hexa", "hepta"),
+                c(2, 3, 4, 5, 6, 7)
+            )[as.character(n)],
+            "_grams_table.txt",
+            sep = ""
+        ),
+        row.names = FALSE,
+        col.names = TRUE,
+        sep = ";"
+    )    
+    
+    flush.console()
+    print(
+        paste(
+            "Tabulka pro ",
+            n,
+            "-gramy je uložena.",
+            sep = ""
+        )
+    )
+    
+}
+
+setwd(mother_working_directory)
 
 
 #### --------------------------------------------------------------------------

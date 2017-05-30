@@ -23,7 +23,7 @@ my_splitted_sentences <- lapply(
 
 my_splitted_sentences <- lapply(
     my_splitted_sentences,
-    function(x) gsub("â€ś", "", x)
+    function(x) gsub("[^a-z ']", "", x)
 )
 
 
