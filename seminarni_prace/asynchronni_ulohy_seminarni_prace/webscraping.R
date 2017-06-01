@@ -16,7 +16,7 @@ my_wikipedia_corpus <- NULL
 my_initial_page_url <- "https://en.wikipedia.org/wiki/World_War_II"
 number_of_scraped_pages <- 0           ## počet aktuálně scrapovaných
                                        ## wikipedických stránek
-how_many_pages_i_would_like_to_scrape <- 1000
+how_many_pages_i_would_like_to_scrape <- 900
                                        ## počet wikipedických stránek,
                                        ## který chci scrapovat
 
