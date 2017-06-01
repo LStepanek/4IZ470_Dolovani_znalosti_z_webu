@@ -4,7 +4,7 @@
 
 ## nastavuji pracovní složku --------------------------------------------------
 
-while(!grepl("seminarni_prace$", getwd())){
+while(!grepl("asynchronni_ulohy_seminarni_prace$", getwd())){
 
     setwd(choose.dir())
     
@@ -22,10 +22,10 @@ mother_working_directory <- getwd()
 for(my_script in c(
     
     "initialization",      ## spouštím inicializaci procedur
+    "helper_functions",    ## pomocné funkce
     "webscraping",         ## webscraping některých stránek anglické Wiki
     "corpora_loading",     ## loaduji již existující korpusy, stop slova
                            ## a nevhodná slova
-    "helper_functions",    ## pomocné funkce
     "text_splitting",      ## rozděluji texty korpusů na věty (i vedlejší)
     "preprocessing",       ## očišťuji věty o interpunkci a bílá místa
     "tokenization",        ## rozděluji věty na slova

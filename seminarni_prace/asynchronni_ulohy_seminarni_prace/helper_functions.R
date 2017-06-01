@@ -146,7 +146,7 @@ getNGrams <- function(
     
     # '''
     # Nad větou rozdělenou na slova "my_splitted_sentences" vytvoří
-	# všechny n-gramy pro zadané "n".
+    # všechny n-gramy pro zadané "n".
     # '''
     
     output <- NULL
@@ -170,6 +170,102 @@ getNGrams <- function(
     }
     
     return(output)
+    
+}
+
+
+#### --------------------------------------------------------------------------
+
+###############################################################################
+
+#### funkce pro webscraping jedné stránky Wikipedie (typu článek)
+#### a pro následnou úpravu formátu do podoby volného textu -------------------
+
+webscrapeMyWikipediaPage <- function(
+    
+    page_url
+    
+){
+    
+    # '''
+    # Funkce stáhne statický HTML obsah jedné stránky z (anglické)
+    # Wikipedie, která je pod odkazem "page_url". Poté extrahuje jen
+    # odstavcové statě ohraničené HTML tagy <p>...</p>.
+    # Z nich pak odstraní veškeré další HTML tagy, HTML entity či
+    # wikipedické tagy.
+    # Nakonec vrací textový řetezec odpovídající jen přirozenému
+    # textu v odstavcích dané stránky Wikipedie.
+    # Kromě toho ještě z textu stránky extrahuje interní webové odkazy
+    # na další stránky Wikipedie, které je poté možné scrapovat.
+    # '''
+    
+    
+    ## stahuji statický HTML obsah --------------------------------------------
+    
+    my_html <- readLines(
+        con = page_url,
+        encoding = "UTF-8"
+    )
+    
+    
+    ## extrahuji jen odstavcové statě ohraničené HTML tagy <p>...</p> ---------
+    
+    my_raw_paragraphs <- my_html[
+        grepl("<p>", my_html) & grepl("</p>", my_html)
+    ]
+    
+    
+    ## očišťuji text paragrafů o HTML tagy, HTML entity a wikipedické tagy ----
+    
+    my_paragraphs <- gsub("<.*?>", "", my_raw_paragraphs)
+    my_paragraphs <- gsub("&.*?;", "", my_paragraphs)
+    my_paragraphs <- gsub("\\[.*?\\]", "", my_paragraphs)
+    my_paragraphs <- gsub("\t", "", my_paragraphs)  ## zbavuji se taublátorů
+    
+    
+    ## vytvářím jeden dlouhý řetězec (odstavec) -------------------------------
+    
+    my_text_output <- paste(my_paragraphs, collapse = " ")
+    
+    
+    ## extrahuji z textu všechny webové interní linky na další stránky
+    ## Wikipedie --------------------------------------------------------------
+    
+    my_links <- paste(
+        "http://en.wikipedia.org",
+        gsub(
+            '\\"',
+            "",
+            gsub(
+                '(.*)(href=)(\\"/wiki/.*?\\")(.*)',
+                "\\3",
+                my_raw_paragraphs[
+                    grepl("href=", my_raw_paragraphs)
+                ]
+            )
+        ),
+        sep = ""
+    )    
+    
+    
+    ## odstraňuji nesmyslné outlinky -- ty, co obsahují mezeru, eventuálně
+    ## ty, co odkazují na celý portál nebo kategorii (jsou o obvykle jen
+    ## seznamy hesel, tedy nevhodné pro sestavené korpusu) --------------------
+    
+    my_links <- my_links[!grepl(" ", my_links)]
+    my_links <- my_links[!grepl("Portal:", my_links)]
+    my_links <- my_links[!grepl("Category:", my_links)]
+    
+    
+    ## vracím výstup ----------------------------------------------------------
+    
+    return(
+        list(
+            "text_stranky" = my_text_output,
+            "outlinky_stranky" = my_links
+        )
+    )    
+    
     
 }
 
