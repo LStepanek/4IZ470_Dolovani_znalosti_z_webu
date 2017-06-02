@@ -11,7 +11,50 @@ library(shiny)
 
 shinyUI(fluidPage(
   
-  titlePanel("The Next Word Prediction"),
+  #titlePanel("The Next Word Prediction"),
+  
+  ## zavádím graficky hezky vypadající header ---------------------------------
+  
+  tagList(
+    
+    tags$head(
+      
+      tags$link(rel = "stylesheet",
+                type = "text/css",
+                href = "style.css"),
+      
+      tags$script(type = "text/javascript",
+                  src = "busy.js")
+      
+    )
+    
+  ),
+  
+  div(id = "header",
+      div(id = "title", "The Next Word Prediction"),
+      div(id = "subsubtitle",
+          
+          HTML("Prediction of the <i>n</i>-th word based on given
+               previous <i>n</i>-1 words and "),
+          
+          tags$a(
+            href = "http://en.wikipedia.org/wiki/N-gram",
+            HTML("<i>n</i>-gramming"),
+            target = "_blank"
+          ),
+          
+          HTML("&bull;"),
+          
+          "Implemented by",
+          
+          tags$a(
+            href = "http://www.fbmi.cvut.cz/user/stepalu2",
+            "Lubomír Štěpánek",
+            target = "_blank"
+          )
+          
+      )
+  ),
   
   sidebarLayout(
     
@@ -203,8 +246,8 @@ shinyUI(fluidPage(
         p("- Department of Biomedical Informatics"),
         p("- Faculty of Biomedical Engineering"),
         p("- Czech Technical University in Prague"),
-        p("- mailto: lubomir.stepanek[AT]fbmi[DOT]cvut[DOT]cz"),        
-        
+        HTML("<a href='mailto:lubomir.stepanek@fbmi.cvut.cz'>
+             lubomir.stepanek[AT]fbmi[DOT]cvut[DOT]cz</a>"),
         br(),
         
         value = 2
