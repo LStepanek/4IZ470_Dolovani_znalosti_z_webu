@@ -55,10 +55,10 @@ my_splitted_sentences <- lapply(
 
 #### odstraňuji slova kratší než tři znaky ------------------------------------
 
-my_splitted_sentences <- lapply(
-    my_splitted_sentences,
-    function(x) x[nchar(x) > 2]
-)
+#my_splitted_sentences <- lapply(
+#    my_splitted_sentences,
+#    function(x) x[nchar(x) > 2]
+#)
 
 
 #### odstraňuji "prázdná" slova -----------------------------------------------
