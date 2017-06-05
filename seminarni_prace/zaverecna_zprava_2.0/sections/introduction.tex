@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Úvod}
+
+Účelem této minimalistické práce je nabídnout a popsat jeden z možných
+způsobů, jak zpracovat relativně rozsáhlý, anglicky psaný text pro účely
+jeho následné statistické reprezentace.
+
+Autor ve výkladu systematicky popisuje proces zpracování textu přirozeného
+jazyka od začátku do konce a bez zbytečného formalismu; v podstatě využívá
+řešení úlohy nad konkrétními daty (korpusem), což posiluje praktický
+aspekt celé práce.
+
+Výchozím bodem pro zpracování přirozeného (anglického) textu je možnost
+nakládat s textovým korpusem daného jazyka. Získaný korpus je poté v několika
+na sebe navazujcích fázích postupně zpracováván tak, že z původních vět
+korpusu nakonec vzniknou uspořádané seznamy slov a kratších sousloví
+pevných délek, tzv. $n$-gramů\index{$n$-gram}. Pomocí nich pak lze jazyk
+tzv. statisticky
+reprezentovat, což umožňuje řešení několika zajímavých úloh nad přirozeným
+jazykem. Jedna z nich je rovněž popsána -- jde o predikci $n$-tého slova%
+\index{$n$-té slovo},
+které by v daném jazyce mělo s největší pravděpodobností následovat po
+zadané $(n - 1)$-členné frázi\index{$(n - 1)$-členná fráze}. Pro účely
+real-time řešení této úlohy byla
+publikována webová aplikace, jejíž popis a zdrojový kód je rovněž součástí
+této publikace.
+
+Funkce a procedury, jež řeší dále uvedené fáze zpracování textu korpusu, 
+jsou implementovány v prostředí a programovacím jazyce \textsf{R}.
+Znalost jazyka \textsf{R}\index{\textsf{R}} však není nutnou podmínkou pro
+čtení této práce;
+na následujících stránkách jsou popsány vesměs obecné principy zpracování
+textu přirozeného jazyka a jsou uvedeny i obecné algoritmy.
+
+V této práci je současně popsán i způsob, jak získat vlastní textový korpus,
+opět s využitím již naimplementovaných procedur a funkcí v jazyce \textsf{R}%
+\index{\textsf{R}}.
+
+Ve snaze posílit "edukační" rozměr této práce jsou v relativně rozsáhlém
+apendixu uvedeny veškeré zdrojové kódy opatřené volnotextovými komentáři;
+kódy postačují pro reprodukci všech uvedených procedur zpracování
+textu přirozeného jazyka.
+
+Práce splní svůj smysl, pokud čtenáře zaujme byť i jedna jediná myšlena,
+která je v následujícím textu uvedena.
+
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+

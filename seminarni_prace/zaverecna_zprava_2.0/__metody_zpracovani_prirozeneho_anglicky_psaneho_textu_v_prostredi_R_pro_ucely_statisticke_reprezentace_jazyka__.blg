@@ -1,0 +1,17 @@
+[0] Config.pm:354> INFO - This is Biber 2.7
+[0] Config.pm:357> INFO - Logfile is '__metody_zpracovani_prirozeneho_anglicky_psaneho_textu_v_prostredi_R_pro_ucely_statisticke_reprezentace_jazyka__.blg'
+[27] biber-MSWIN64:303> INFO - === 
+[50] Biber.pm:359> INFO - Reading '__metody_zpracovani_prirozeneho_anglicky_psaneho_textu_v_prostredi_R_pro_ucely_statisticke_reprezentace_jazyka__.bcf'
+[119] Biber.pm:832> INFO - Using all citekeys in bib section 0
+[132] Biber.pm:3670> INFO - Processing section 0
+[151] Biber.pm:3840> INFO - Looking for bibtex format file 'references.bib' for section 0
+[154] bibtex.pm:1435> INFO - Decoding LaTeX character macros into UTF-8
+[159] bibtex.pm:1292> INFO - Found BibTeX data source 'references.bib'
+[169] Utils.pm:164> WARN - month field 'oct' in entry 'Davies2010' is not an integer - this will probably not sort properly.
+[189] Utils.pm:164> WARN - month field 'sep' in entry 'Chomsky1956' is not an integer - this will probably not sort properly.
+[211] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'variable = shifted' with 'variable = non-ignorable'
+[211] UCollate.pm:68> INFO - Overriding locale 'cs-CZ' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[211] Biber.pm:3499> INFO - Sorting list 'none/global/' of type 'entry' with scheme 'none' and locale 'cs-CZ'
+[217] bbl.pm:608> INFO - Writing '__metody_zpracovani_prirozeneho_anglicky_psaneho_textu_v_prostredi_R_pro_ucely_statisticke_reprezentace_jazyka__.bbl' with encoding 'UTF-8'
+[219] bbl.pm:712> INFO - Output to __metody_zpracovani_prirozeneho_anglicky_psaneho_textu_v_prostredi_R_pro_ucely_statisticke_reprezentace_jazyka__.bbl
+[220] Biber.pm:109> INFO - WARNINGS: 2

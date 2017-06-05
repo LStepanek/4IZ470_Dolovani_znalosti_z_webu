@@ -1,0 +1,175 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Workflow získání a zpracování textu}
+
+Zpracování\index{analýza} textu přirozeného jazyka patří mezi úlohy oblasti
+\textit{\underline{n}atural \underline{l}anguage \underline{p}rocessing}
+(NLP)\index{processing!natural language processing}, kam lze v širším slova smyslu
+řadit kromě zpracování textů
+i práci s netextovými záznamy daného jazyka.
+
+My se zde omezíme pouze na práci s textovými zdroji daného přirozeného
+jazyka, konkrétně na jako reprezentaci formou rozsáhlého souboru
+(ne nutně konzistentních) vět psaných v daném jazyce, tedy formou tzv.
+\textit{korpusu}\index{korpus}.
+
+Jednotlivé procedury zpracování textu přirozeného jazyka na sebe navazují,
+jak ukazuje obrázek~\ref{pipeline_fig}. 
+
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=1cm, auto,]
+  \node[punkt] (helsinki_corpora) {výchozí korpus};
+  \node[punkt, right=1.0cm of helsinki_corpora] (webscraping) {%
+    obohacení korpusu webscrapingem
+  }
+    edge[pil, bend left=45] (helsinki_corpora);
+  \node[punkt, below=of helsinki_corpora] (sentence_splitting) {%
+    rozdělení korpusu na věty
+  };
+  \node[punkt, opacity=0, text opacity=0] (helsinki_corpora_dummy) {%
+    výchozí korpus
+  }
+    edge[pil, bend left=0] (sentence_splitting);
+  \node[punkt, below=of sentence_splitting] (text_processing) {%
+    preprocessing textu
+  };
+  \node[punkt, below=of helsinki_corpora, opacity=0, text opacity=0] (%
+    sentence_splitting_dummy) {rozdělení korpusu na věty}
+    edge[pil, bend left=0] (text_processing);
+  \node[punkt, below=of text_processing] (tokenization) {%
+    tokenizace vět na slova
+  };
+  \node[punkt, below=of sentence_splitting, opacity=0, text opacity=0] (%
+  text_processing_dummy) {preprocessing textu}
+    edge[pil, bend left=0] (tokenization);
+  \node[punkt, below=of tokenization] (words_removing) {%
+    odstranění stop slov a vulgarismů,
+    číslic a krátkých slov
+  };
+  \node[punkt, below=of text_processing, opacity=0, text opacity=0] (%
+    tokenization_dummy) {tokenizace vět na slova}
+    edge[pil, bend left=0] (words_removing);
+  \node[punkt, below=of words_removing] (n_gramming) {$n$-gramming};
+  \node[punkt, below=of tokenization, opacity=0, text opacity=0] (%
+    words_removing_dummy%
+  ) {odstranění stop slov a vulgarismů, číslic a krátkých slov}
+    edge[pil, bend left=0] (n_gramming);
+\end{tikzpicture}
+\caption{Schéma (zjednodušené) asynchronních úloh během zpracování textu %
+         pro účely jeho statistické reprezentace ($n$-grammingu)%
+         \index{$n$-gram}%
+         \label{pipeline_fig}}
+\end{figure}
+
+
+V tomto pojednání se zaměřujeme na
+zpracování textů psaných anglicky, neboť angličtina\index{angličtina} je
+analytický
+jazyk~\cite{Gorblach1991}\index{jazyk!analytický}, jehož textové a
+jazykově-statistické zpracování
+je při dnešních možnostech relativně dobře dobře zvládnutelné, a to
+především díky minimálnímu zatížení anglických textů morfematikou%
+\index{morfematika}
+ohebných slovních druhů; \textit{lemmatizaci}\index{lemmatizace} slov, tedy
+jejich převod
+na morfologicky základní tvar, lze v anglickém textu
+v podstatě vynechat, aniž by byla ohrožena kvalita analýzy textu i konečného
+$n$-grammingu\footnote{Opakem by byla čeština, tedy flekční jazyk%
+\index{jazyk!flekční}, ve kterém
+je jazyková analýza prakticky vždy závislá na kvalitě lemmatizace%
+\index{lemmatizace} kvůli bohaté
+morfologii s relativně vysokou mírou nepatternových výjimek.} Proto ve
+schématu na obrázku~\ref{pipeline_fig} chybí fáze lemmatizace.
+
+Výchozím bodem je stav, kdy je k dispozici existující korpus\index{korpus}
+anglických textů
+(v~následujících statích bude zpracovávána část tzv.
+\textit{Helsinki corpora}~\cite{Kytoo1996}\index{korpus!helsinský};
+jde o anglické texty různého
+původu -- pocházejí z anglických zpravodajských relací, blogů
+a~z~twitteru). K nim byl
+přidán ještě menší korpus získaný vlastním webscrapingem\index{webscraping}
+malé části
+anglicky mluvící Wikipedie\index{Wikipedie}.
+
+Korpusy je poté možné dohromady jednotně předzpracovat.
+Bloky textů korpusů jsou nejdříve rozděleny na věty, a to podle určité
+heuristiky (viz dále).
+
+Dále je text tvořený větami v rámci preprocessingu\index{processing!preprocessing} očištěn
+o některé nadbytečné znaky (především interpunkci\index{interpunkce});
+v závěru této fáze jsou korpusy\index{korpus} tvořeny
+oddělenými větami, které tvoří písmena malé a velké anglické abecedy
+a mezery. Velká písmena byla v rámci redukce "variability" textu převedena
+bez ztráty informace na malá písmena. Rovněž je v této fázi žádoucí
+oprostit slova vět o ty, které nesou pouze kontextovou informaci, zde jde
+především o číslice. Některá velmi krátká slova (obvykle o délce kratší
+než tři písmena) lze považovat za výsledky odstranění interpunkce%
+\index{interpunkce} (zejména
+apostrofu v rámci zkratkovým forem, např. kdy z "i'm" jakožto původně
+tříznakového "slova" zbude pouze "i" a "m"), kdy obvykle vznikají jen
+oddělené zkrácené části fráze, které má smysl také odstranit.
+
+Následuje fáze tokenizace\index{tokenizace} vět na jednotlivá slova,
+výsledkem je pro daný korpus množina uspořádaných, různě dlouhých
+$k$-tic slov, kde $k \geq 1$ je pro každou větu nějaké přirozené číslo
+označující počet slov této věty. V této fázi je možné z vět odstranit ta
+slova, která v textech nejsou z nějakého smysluplného důvodu žádoucí.
+Jde především o vulgarismy\index{slova!vulgarismy} a jinak nevhodná
+slova\index{slova!nevhodná}, dále je
+možné (ale ne nutné) odstranit tzv. stop slova\index{slova!stop slova}
+-- jde obvykle o často
+se objevující slova, většinou neohebných slovních druhů (není pravidlem),
+která nenesou příliš zajímavou informaci.
+
+Nyní by v případě flekčního jazyka\index{jazyk!flekční} následovala fáze
+lemmatizace\index{lemmatizace}, tedy snížení
+variability slov (konkrétně ohebných slovních) jejich převodem vždy na základní
+tvar. Tato podúloha je však netriviální, naštěstí v případě anglického jazyka%
+\index{angličtina},
+jak již bylo zmíněno, ji lze vynechat bez významného snížení kvality
+předzpracování jazyka. Morfologie\index{morfematika} anglických slov zahrnuje
+v podstatě jen
+přidání koncovek "-s" či "-es" v~případě plurálu.
+
+Následně, když jsou korpusy zpracovány do té fáze, že jde o velké
+množství uspořádaných $k$-tic vždy pro přirozená $k \geq 1$ lišící se
+mezi původními větami, je možné text korpusů uchopit z pohledu
+statistického modelování jazyka a nalézt v~textu tzv. $n$-gramy\index{$n$-gram}
+pro malá
+$n$, typicky $n \in \{2, 3, 4, 5\}$, ale i vyšší.
+Jde o $n$-členná sousloví, tedy $n$-tice sousedících, po sobě
+jdoucích slov\cite{Manning1999}. Po sestavení $n$-gramů\index{$n$-gram} je možné vytvořit
+tabulku četností pro jednotlivá $n$-členná slovní spojení a získat tak bodové
+odhady apriorních pravděpodobností, s jakými se v textu daného
+přirozeného jazyka vyskytují.
+
+Takové tabulky četností\index{$n$-gram!tabulka četností}
+$n$-gramů\index{$n$-gram} pro $n \in \{2, 3, 4, 5\}$ či vyšší
+jsou základem pro algoritmy\index{algoritmus} předpovědí takového slova, které by v textu
+daného přirozeného jazyka následovalo s největší pravděpodobností po
+zadaných $n - 1$ slovech tvořících jazykové sousloví.
+
+K tomuto účelu byla vytvořena webová aplikace
+\texttt{the\_next\_word\_prediction}\index{aplikace!\texttt{the\_next\_word\_prediction}},
+která uživateli po zadání
+$(n - 1)$-členného slovního spojení v daném jazyce vrátí
+nejpravděpodobněji následující $n$-té slovo\index{$n$-té slovo}. Její
+principy fungování budou rovněž popsány.
+
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+

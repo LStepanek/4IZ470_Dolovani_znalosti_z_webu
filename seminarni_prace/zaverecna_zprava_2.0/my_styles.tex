@@ -1,0 +1,194 @@
+﻿%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% loaduji některé balíčky -----------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, czech]{babel}
+
+\usepackage[
+  inner = 4cm,
+  outer = 2cm,
+  top = 3cm,
+  bottom = 3cm
+]{geometry}
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{graphicx}
+
+\usepackage{tocloft}
+\usepackage{enumerate}
+\usepackage{eso-pic}
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage[bottom]{footmisc}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{blindtext}
+\usepackage{scrextend}
+\usepackage{movie15}
+\usepackage{caption}
+\usepackage{epstopdf}
+\usepackage{indentfirst}
+\usepackage{imakeidx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{tikz}
+
+
+% upřesňuji vlastnosti tikz obrázků -------------------------------------------
+\usetikzlibrary{arrows,positioning} 
+\tikzset{
+    %Define standard arrow tip
+    >=stealth',
+    %Define style for boxes
+    punkt/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           text width=6.5em,
+           minimum height=2em,
+           text centered},
+    % Define arrow style
+    pil/.style={
+           ->,
+           thick,
+           shorten <=2pt,
+           shorten >=2pt,}
+}
+%\usepackage{fancyhdr}
+\usepackage{titleps}
+
+
+% nastavuji header ------------------------------------------------------------
+\newpagestyle{my_page}{%
+  \headrule
+  \sethead[\sectiontitle][][]%
+          {}{}{\sectiontitle}
+  \setfoot[\thepage][][]%
+          {}{}{\thepage}
+}
+\settitlemarks{section,subsection}
+\pagestyle{my_page}
+
+% nastavuji indentaci odstavců ------------------------------------------------
+\setlength\parindent{24pt}
+
+% nastavuji složku s grafikou -------------------------------------------------
+\graphicspath{{./figures/}}
+
+% bibliography management -----------------------------------------------------
+\usepackage[
+  backend = biber,
+  style = numeric,
+  bibencoding = UTF8,
+  citestyle = ieee
+]{biblatex}
+
+\addbibresource{references.bib}    %% loaduji reference
+\nocite{*}
+
+% nastavuji parametry rejstříku -----------------------------------------------
+\indexsetup{
+  level = \section,
+  toclevel = \section,
+  noclearpage,
+  firstpagestyle = my_page
+}
+\makeindex    %% inicializuji indexování do rejstříku
+
+% nastavuji highlighting chunků kódu na jazyk R a další detaily ---------------
+\captionsetup[lstlisting]{position = bottom}
+\definecolor{my_gray}{rgb}{0.4,0.4,0.4}
+\renewcommand{\lstlistingname}{Kód}  %% předefinovávám název chunků
+\lstdefinestyle{custom_R}{
+  basicstyle = \ttfamily\footnotesize,
+  belowcaptionskip = 1\baselineskip,
+  breaklines = true,
+  frame = L,
+  xleftmargin = \parindent,
+  language = R,
+  showstringspaces = false,
+  keywordstyle = \bfseries\color{green!40!black},
+  commentstyle = \itshape\color{purple!40!black},
+  identifierstyle = \color{blue},
+  stringstyle = \color{orange},
+  numbers = left,
+  numbersep = 12pt,
+  numberstyle = \small\color{my_gray},
+  texcl = true,
+  alsoother = {\#},
+  inputencoding = utf8,
+  extendedchars = true,
+  literate = %
+  {á}{{\'a}}1
+  {č}{{\v{c}}}1
+  {ď}{{\v{d}}}1
+  {é}{{\'e}}1
+  {ě}{{\v{e}}}1
+  {í}{{\'i}}1
+  {ň}{{\v{n}}}1
+  {ó}{{\'o}}1
+  {ř}{{\v{r}}}1
+  {š}{{\v{s}}}1
+  {ť}{{\v{t}}}1
+  {ú}{{\'u}}1
+  {ů}{{\r{u}}}1
+  {ý}{{\'y}}1
+  {ž}{{\v{z}}}1
+  {Á}{{\'A}}1
+  {Č}{{\v{C}}}1
+  {Ď}{{\v{D}}}1
+  {É}{{\'E}}1
+  {Ě}{{\v{E}}}1
+  {Í}{{\'I}}1
+  {Ň}{{\v{N}}}1
+  {Ó}{{\'O}}1
+  {Ř}{{\v{R}}}1
+  {Š}{{\v{S}}}1
+  {Ť}{{\v{T}}}1
+  {Ú}{{\'U}}1
+  {Ů}{{\r{U}}}1
+  {Ý}{{\'Y}}1
+  {Ž}{{\v{Z}}}1
+}
+\lstset{escapechar = @, style = custom_R}
+
+% české uvozovky --------------------------------------------------------------
+\DeclareQuoteAlias{german}{czech}
+\MakeOuterQuote{"}
+
+% přejmenovávám popisek obsahu na "Obsah" -------------------------------------
+\renewcommand{\contentsname}{Obsah}
+
+% přejmenovávám popisky obrázků na "Obr." -------------------------------------
+\renewcommand{\figurename}{Obr.}
+
+% přejmenovávám popisky tabulek na "Tab." -------------------------------------
+\renewcommand\tablename{Tab.}
+
+% upravuji formát obsahu ------------------------------------------------------
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% definuji prostředí nečíslovaného lemmatu ------------------------------------
+\newtheorem*{lemma*}{Lemma}
+
+% handling pro správné číslování sekcí a subsekcí ve třídě "report" -----------
+\renewcommand\thesection{\arabic{section}}
+
+% číslování sekcí a subsekcí --------------------------------------------------
+\setcounter{secnumdepth}{5}
+
+% definuji arg max ------------------------------------------------------------
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

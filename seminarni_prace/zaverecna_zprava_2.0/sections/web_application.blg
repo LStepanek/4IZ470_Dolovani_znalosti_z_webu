@@ -1,0 +1,5 @@
+[0] Config.pm:354> INFO - This is Biber 2.7
+[0] Config.pm:357> INFO - Logfile is 'web_application.blg'
+[26] biber-MSWIN64:303> INFO - === 
+[2955] Utils.pm:180> ERROR - Cannot find control file 'web_application.bcf'! - did you pass the "backend=biber" option to BibLaTeX?
+[2955] Biber.pm:113> INFO - ERRORS: 1

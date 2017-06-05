@@ -1,0 +1,433 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Metody získání a zpracování textu}
+
+V rámci relativně rozsáhlé fáze preprocessingu\index{processing!preprocessing}
+a processingu\index{processing} textových dat
+je nutné provést několik asynchronních úloh\index{úloha!asynchronní} (tedy "jednorázových
+předpočítání"), které jsou obvykle náročné na vývojový i exekuční čas.
+V následujících statích jsou jednotlivé části úlohy naprogramovány a řešeny
+v prostředí \textsf{R}\index{\textsf{R}}, které je určeno pro statistické výpočty a následné
+grafické náhledy~\cite{Rlanguage}.
+
+%Současně existuje online repozitář
+%umístěný na platformě \textsf{GitHub} a obsahující všechna zdrojová data
+%a zdrojové kódy, kde je možné je i upravovat; je dostupný zde
+
+%\begin{center}
+%\href{
+%  https://github.com/LStepanek/4IZ470\_Dolovani\_znalosti\_z\_webu%
+%  /tree/master/seminarni\_prace/
+%}{%
+%  https://github.com/LStepanek/4IZ470\_Dolovani\_znalosti\_z\_webu/
+%}.
+%\end{center}
+
+Veškerý komentovaný zdrojový kód je rovněž uveden apendixu publikace.
+I přes bohatou řadu knihoven pro \textit{text mining} a \textit{natural
+language processing}\index{processing!natural language processing}, kterou má jazyk
+\textsf{R}\index{\textsf{R}} k dispozici, jsou všechny
+funkce napsány "de novo" vlastními silami a jen s~využitím základních klauzulí
+jazyka \textsf{R}\index{\textsf{R}} (a to i ze cvičných důvodů); tedy bez
+použití dostupných
+intermediánních či vyšších vestavěných funkcí. Všechny procedury naráz spustí
+kód~\ref{main}~a~\ref{initialization}, pro všechny skripty
+viz část~\ref{sec:Apendix}.
+
+
+\subsection{Získání korpusu}
+
+Jak již bylo naznačeno, základním krokem je získání dostatečně velkého
+textového základu pro další možné zpracování, tedy korpusu\index{korpus}.
+
+V současnosti existuje již velká řada anglických korpusů\index{korpus},
+některé z nich
+jsou za určitých podmínek k dispozici pro nekomerční a badatelské účely.
+
+Jmenujme např. Corpus of Contemporary American English~\cite{Davies2010}%
+\index{korpus!Corpus of Contemporary American English},
+který nabízí 520 milionů slov,
+British National Corpus~\cite{Landow1993}\index{korpus!British National Corpus}
+obsahující 100 milionů slov
+nebo tzv. helsinské korpusy anglických textů\index{korpus!helsinský}
+postavené na cca 1,5 milionu
+slov \cite{Kytoo1996}.
+
+Obvykle není možné korpusy volně stáhnou. V případě helsinských korpusů%
+\index{korpus!helsinský}
+však je text, který vychází z jejich částí týkajících se anglických
+zpravodajských relací, anglicky psaných blogů a anglicky psaných tweetů
+sociální sítě \textsf{twitter}, možné získat v rámci absolvování masivního
+otevřeného online kurzu (MOOC) \href{https://www.coursera.org/specializations%
+/jhu-data-science/}{\textit{Data Science}} na online univerzitě
+Coursera\textsuperscript{\textregistered}, který nabízí John Hopkins Bloomberg
+School of Public Health. Tato malá část původního korpusu je ke stažení např.
+\href{https://d396qusza40orc.cloudfront.net/dsscapstone/dataset%
+/Coursera-SwiftKey.zip}{zde}. Vzhledem k tomu, že kurz je volně dostupný
+a během něj je nakládání s odkazovanými částmi korpusů zcela v režii účastníka
+kurzu, zdá se, že nakládání s odkazovaným výňatkem korpusu není nelegitimní.
+Soubor v odkazu obsahuje i korpusy jiných jazyků než angličtiny.
+
+Jsou-li korpusy\index{korpus} uloženy jako volný text (\texttt{.txt}) ve vhodné složce,
+jsou do konzole \textsf{R}\index{\textsf{R}} nahrány kódem \ref{corpora_loading}.
+
+
+\subsection{Webscraping}
+
+Smyslem webscrapingu\index{webscraping} je stáhnout textový obsah nějakého
+počtu anglicky psaných
+webových stránek, zde za účelem zvětšení celkového rozsahu použitého korpusu\index{korpus}.
+Zároveň lze předpokládat, že "korpus" bude obohacen nejen kvantitativně ve
+smyslu zvětšení jeho rozsahu, ale do jisté míry i kvalitativně -- zde
+samozřejmě záleží na úrovni jazykové kvality stránek, které budou
+"scrapovány".
+
+
+\subsubsection{Webscraping anglické Wikipedie}
+
+Původní korpus může být rozšířen (nejen) o texty z anglické Wikipedie%
+\index{Wikipedie}.
+Současně mohou tyto texty sloužit i samostatně jako plnohodnotný korpus
+anglického jazyka\index{angličtina}.
+
+Výhodou článků na Wikipedii\index{Wikipedie} je fakt, že jejich obsah (a
+v podstatě i většina
+formy) je uložen jen pomocí stacionárního HTML\index{HTML}
+(\underline{H}yper\underline{T}ext \underline{M}arkup \underline{L}anguage).
+Formátování pomocí kaskádových stylů (CSS, \underline{C}ascading
+\underline{S}tyle \underline{S}heets)\index{CSS}, respektive aditivní
+javascriptovou\index{javascript} funkcionalitu je sice na stránkách Wikipedie%
+\index{Wikipedie} možné použít
+díky sdílení stylů a funkcí na Wikimedia Commons, běžné to rozhodně není;
+proto lze Wikipedii považovat za dobrý zdroj
+\textit{hard-typed} obsahu s pravidelnou (HTML) strukturou.
+Současně lze očekávat, že volný text ze stránek Wikipedie%
+\index{Wikipedie} bude mít solidní
+gramatickou úroveň, půjde často o komplikovaná a dlouhá souvětí s hojným
+zastoupením idiomatických frází typických i pro akademickou anglickou mluvu.
+Nehrozí tak, že by mohl být původní korpus obohacením o text z anglicky
+psané Wikipedie\index{Wikipedie} znehodnocen.
+
+Pro účely webscrapingu\index{webscraping} jedné stránky Wikipedie%
+\index{Wikipedie} byla napsána funkce
+
+\begin{center}
+\texttt{webscrapeMyWikipediaPage()},
+\end{center}
+
+jejíž kód v jazyce \textsf{R}\index{\textsf{R}} je uveden v chunku~\ref{helper_functions}.
+
+Popišme nyní neformálně princip\index{algoritmus}, jakým funkce
+\texttt{webscrapeMyWikipediaPage()} funguje. Jejím vstupem je URL\index{URL} některé libovolné
+stránky typu článku anglické Wikipedie\index{Wikipedie} a výstupem je jeden textový řetězec,
+který je volným textem extrahovaným z textového obsahu stránky dané URL
+adresou. Funkce tedy desktopově stáhne veškerý HTML\index{HTML} obsah dané URL adresy,
+poté extrahuje všechny řádky HTML kódu, které jsou ohraničeny HTML tagy\index{HTML!tag}
+\texttt{<p>} a \texttt{</p>}; ty totiž vymezují třídu HTML textu typu
+\texttt{paragraph} a víceméně jako jediné obsahují v rámci stránky
+volný text. Naopak ostatní HTML\index{HTML} objekty typu nadpisy (vymezené tagy
+\texttt{<h$i$>} a \texttt{</h$i$>}), tabulky (vymezené tagy \texttt{<table>}
+a \texttt{</table>}) apod. volný text neobsahují, resp. si tím nemůžeme
+být jistí, proto v rámci vysoké specificity scrapování pouze volného
+textu je obsah mezi tagy jinými než \texttt{<p>} a \texttt{</p>} ve výstupu
+vynechán.
+
+Poté, co je extrahován volný text z HTML třídy \texttt{paragraph}, je
+ještě prosycen jinými HTML tagy\index{HTML!tag} (\texttt{<\ldots>\ldots</\ldots>}),
+HTML entitami\index{HTML!entita} (\texttt{\&\ldots;}) či wikipedickými tagy%
+\index{Wikipedie!tag} (obvykle
+\texttt{[\ldots]}). S aplikací Chomského hierarchie jazyků%
+\index{jazyk!Chomského hierarchie} a Chomského
+pravidla~\cite{Chomsky1956}, že jazyk vyšší úrovně je třeba "značkovat"
+jazykem nižší úrovně (ve skutečnosti obecnějším, tedy metajazykem\index{jazyk!metajazyk}), byly už
+tak relativně obecné HTML klauzule\index{HTML!klauzule} z textu extrahovány pomocí regulárních
+výrazů\index{regulární výraz}. Snadno nahlédneme, že regulární výraz \texttt{''<.*?>''} odstraní
+všechny HTML tagy\index{HTML!tag} -- vyhledá totiž veškerý obsah (\texttt{.}) v libovolném
+množství (\texttt{*}) mezi úhlovými závorkami (\texttt{<\ldots>}), ale tak,
+aby např. v řádku \texttt{''<p>Ahoj světe</p>''} odstranil pouze HTML tag,
+nikoliv celý řádek; to vyjádříme otazníkem \texttt{?}, který regulárnímu výrazu
+říká "don't be greedy"\index{algoritmus!greedy}, tedy matchuje pouze nejkratší podřetězec daný
+regulárním výrazem. Obdobně regulární výraz\index{regulární výraz} \texttt{<\&.*?;>} matchuje
+"nehladově" všechny HTML entity\index{HTML!entita} a výraz \texttt{''\textbackslash
+\textbackslash [.*? \textbackslash \textbackslash ]''} naopak wikipedické tagy%
+\index{Wikipedie!tag}.
+Výsledkem takového očištění textových dat, původně charakteru HTML kódu,
+je pak volný text obsahující prakticky jen písmena abecedy, interpunkci
+a~číslovky\index{číslovka}.
+
+Kromě sestavení volného textu funkce z HTML obsahu extrahuje i všechny
+interní webové linky\index{link!webový} v rámci anglické Wikipedie\index{Wikipedie};
+opět pomocí regulárního
+výrazu\index{regulární výraz} matchujícího pattern \texttt{href=''/wiki/\ldots''} typický pro
+wikipedický interní link\index{link!interní}\index{Wikipedie}.
+
+Zmíněnou funkci následuje procedura, viz chunk kódu~\ref{webscraping}\index{webscraping},
+která na vstupu použije jeden zvolený
+článek, z něj vyextrahuje všechny interní outlinky\index{link!outlink} vedoucí na jiné
+stránky typu článek anglické Wikipedie\index{Wikipedie} a současně scrapuje%
+\index{webscraping} text tohoto článku.
+
+Outlinky\index{link!outlink} byly uloženy do globální proměnné \texttt{my\_links} s linky. V druhé
+iteraci je vyscrapována stránka (a do stejné globální proměnné s~linky jsou
+uloženy její outlinky) dostupná z prvního linku v globální proměnné s~linky.
+V třetí iteraci je proces opakován se stránkou odkazovanou druhým linkem
+v globální proměnné s~linky \texttt{my\_links}. Proces je opakován do
+chvíle, než je získáno určité, uživatelem definované množství vyscrapovaných
+wikipedických\index{Wikipedie} stránek\footnote{Hypoteticky by mohla být procedura nechtěně
+ukončena i dříve -- a to např. tehdy, kdyby volba iniciální stránky nebyla
+vhodná, protože by tato neobsahovala žádné outlinky\index{link!outlink}, resp. by nějaké
+obsahovala, ale ty by vedly pouze na malé množství stránek, které by
+odkazovaly (jako izolovaný orientovaný graf\index{graf!orientovaný}) pouze samy na sebe
+(fenomén \textit{link farm sink}\index{link!farm sink}).}.
+
+Lze však odvodit, že uvedená webscrapovací funkce\index{webscraping} a procedura mohou v konečném
+čase teoreticky vytvořit rozsáhlý korpus ze stránek Wikipedie\index{Wikipedie} (budou-li
+tyto vzájemně dostatečně propojené interními linky), a to nejen anglické
+(algoritmus není citlivý na scrapovaný text).
+
+
+\subsection{Dělení textu do vět}
+
+Pro tuto úlohu byla implementována funkce 
+
+\begin{center}
+\texttt{splitTextIntoSentences()},
+\end{center}
+
+jejímž vstupem je textový řetězec celého odstavce a výstupem je určitý počet
+jednotlivých vět, na které je odstavec funkcí rozdělen~\ref{text_splitting}.
+Algoritmus\index{algoritmus} využívá regulárních výrazů\index{regulární výraz},
+a sice je založen na pozorování, že na
+hranici dvou vět se vyskytuje prakticky vždy jeden z následujících patternů
+znaků:
+
+\begin{itemize}
+  \item sekvence tečka, mezera (žádá, jedna, nebo i více), velké písmeno
+  -- tato sekvence je matchována regulárním výrazem\index{regulární výraz}
+  \texttt{''\textbackslash \textbackslash .\textbackslash
+          \textbackslash s*[A-Z]+''},
+  \item sekvence otazník, mezera (žádá, jedna, nebo i více), velké písmeno
+  -- tato sekvence je matchována regulárním výrazem\index{regulární výraz}
+  \texttt{''\textbackslash \textbackslash ?\textbackslash
+          \textbackslash s*[A-Z]+''},
+  \item sekvence vykřičník, mezera (žádá, jedna, nebo i více), velké písmeno
+  -- tato sekvence je matchována regulárním výrazem\index{regulární výraz}
+  \texttt{''\textbackslash \textbackslash !\textbackslash
+          \textbackslash s*[A-Z]+''},
+  \item sekvence dvojtečka, mezera (žádá, jedna, nebo i více)
+  -- tato sekvence odděluje nejspíše větu hlavní od věty vedlejší,
+  což můžeme sémanticky vnímat jako dvě různé věty (alespoň pro účely
+  $n$-grammingu\index{$n$-gram}); sekvence je matchována regulárním výrazem%
+  \index{regulární výraz}
+  \texttt{''\textbackslash \textbackslash :\textbackslash \textbackslash s*''}.
+\end{itemize}
+
+Funkce relativně spolehlivě rozdělí libovolně dlouhý korpus\index{korpus} o libovolném
+počtu vět na jednotlivé věty. Limitací funkce mohou být např. zkratky
+titulů, které budou matchovány první uvedenou sekvencí, ale ve skutečnosti
+nejsou na hranici dvou vět (v případě titulu \texttt{Ph.D.} je tento maskou
+pro pattern \texttt{''\textbackslash \textbackslash .\textbackslash
+\textbackslash s*[A-Z]+''}, dvě věty od sebe však jistě nerozděluje).
+Předpokládejme však, že půjde o relativně vzácný jev, který významně nenaruší
+další analýzu textu a $n$-gramming\index{$n$-gram}.
+
+Dlužno říci, že jde o výpočetně náročnou úlohu: předpokládejme korpus délky
+$p$ symbolů, pak pro každou ze čtyř uvažovaných sekvencí mezi větami je tento
+korpus v lineárním čase proscanován\index{výpočetní čas!lineární}
+(každá alespoň dvojice sousedních znaků je
+porovnána s regulárním výrazem), dostáváme tedy celkem $3(p-2)$ porovnání
+s patternem, pomocí asymptotické časové složitosti tedy
+$\Theta(3p) = \Theta(p)$. Pak při průměrné délce $q$ symbolů jedné věty je
+předchozím porovnáváním nalezeno průměrně cca $\frac{p}{q}$ hranic sousedních
+vět, které jsou však sortovány\index{sorting} jen v rámci sekvence. Je nutné tedy sortovat
+tři vektory o délce zhruba $\frac{p}{3q}$ rostoucích čísel dohromady,
+tím dostáváme výpočetní čas přinejmenším $\Theta(\frac{p}{q} \log \frac{p}{q})$
+(merge sort). Nakonec je v lineárním čase $\Theta(\frac{p}{q})$ postupně
+ukrojena vždy "nová" první věta z postupně se zkracujícího řetězce korpusu,
+jak je "zpředu" vždy zkrácen o substring do prvního dalšího indexu označujícího
+novou hranici vět. Zřejmě tedy rozdělení jednoho korpusu na věty běží v čase
+lehce náročnějším než lineárním\index{výpočetní čas!nelineární},
+$\Theta(\frac{p}{q} \log \frac{p}{q})$, pro
+velká $p$ jde obecně o zdlouhavou proceduru.
+
+
+\subsection{Preprocessing textu}
+
+V rámci navazujícího preprocessingu\index{processing!preprocessing} textu jsou pomocí procedur skriptu
+
+\begin{center}
+\texttt{preprocessing.R},
+\end{center}
+
+
+viz též~\ref{preprocessing}, provedeny v získaných větách tyto
+úpravy:
+
+\begin{itemize}
+  \item odstraněny zkratkové formy obsahující apostrof (např. \texttt{I'll}
+  (I will)); jsou matchovány regulárním výrazem\index{regulární výraz}
+  \texttt{''[a-zA-Z]+'[a-zA-Z]+''};
+  \item odstraněny všechny znaky, které není možné kódovat pomocí UTF-8\index{kódování!UTF-8};
+  \item všechna velká písmena jsou převedena na malá;
+  \item všechny vícenásobné mezery jsou nahrazeny jednoduchou
+  mezerou (\texttt{'' ''});
+  \item odstraněny tzv. leading\index{mezera!leading} a trailing\index{mezera!traling}
+  spaces (uvozující a koncové
+  mezery); snadno nahlédneme, že ty nejsou předchozím krokem odstraněny;
+  \item nakonec je z vět odstraněna veškerá interpunkce včetně závorek
+  a dalších znaků netypických pro přirozený text (tedy hashtagů\index{hashtag}, zavináčů,
+  smajlíkových forem apod.).
+\end{itemize}
+
+
+\subsection{Tokenizace}\index{tokenizace}
+
+Ve fázi, kdy je proveden kvalitní preprocessing\index{processing!preprocessing}
+a věty obsahují prakticky
+jen písmena malé anglické abecedy a jednoduché mezery, což vyplývá z operací
+provedených v rámci preporcessingu%
+\index{processing!preprocessing}, je tokenizace\index{tokenizace} vět na slova relativně
+snadnou úlohou. V rámci skriptu \texttt{tokenization.R}~\ref{tokenization}
+jsou namapovány indexy mezer ve větách a~podle nich jsou pak věty rozděleny
+na slova pomocí uživatelem definované funkce
+\texttt{splitSentenceIntoWords()}~\ref{helper_functions}. Výsledkem je tedy
+pro daný korpus\index{korpus} tolik uspořádaných $k$-tic\footnote{$k$ zde není konstanta,
+variuje mezi jednotlivými větami.}, kolik obsahuje korpus vět; přirozené
+$k \geq 1$ udává pro každou větu počet slov, na kolik je rozdělena.
+
+
+
+\subsection{Odstranění stop slov a dalších}
+
+Máme-li věty již rozděleny na slova\index{slova}, je možné některá slova odstranit,
+je-li k~tomu speciální důvod. Na jedné straně je třeba si uvědomit,
+že odstraněním jednoho nebo více slov z věty, která je nyní reprezentována
+uspořádanou $k$-ticí, kde $k$ je počet jejích slov, můžeme narušit
+"sémantickou" plynulost věty, kterou je nepochybně vhodné udržet pro účely
+následného $n$-grammingu\index{$n$-gram}. V poslední době se objevují články, které
+odstranění stop slov\index{slova!stop slova}, které bylo ještě donedávna pro některé typy
+především statistických úloh nad zpracováním přirozených textů rutinní
+fází, již nedoporučují, nebo ho minimálně zpochybňují, např.~\cite{Saif2014}.
+Pravděpodobně to souvisí s rozvojem sofistikovanějších metod pro účely
+sémantické analýzy (např. sentiment analýzy\index{analýza!sentimentu}), kde je vypuštění
+(stop) slov\index{slova!stop slova} z vět vnímáno skutečně jako narušení jazykové kontinuity
+vět a ztrátu jejich "přirozenosti" či "autentičnosti", což nakonec
+zhoršuje výsledky sémantické analýzy\index{analýza!sentimentu}. Navíc se běžně uváděné seznamy
+anglických stop slov\index{slova!stop slova} významně liší, což je rovněž argument spíše proti
+rutinnímu odstraňování stop slov\index{slova!stop slova} z vět reprezentovaných slovy, která jsme
+získali tokenizací\index{tokenizace}. Programátorsky jde o relativně snadnou úlohu
+-- asymetrický rozdíl dvou uspořádaných seznamů zde vnímaných jako množiny,
+kdy od uspořádaného seznamu slov věty vnímaného jako množina
+(v Pythonu typicky \texttt{set(list)}) "odečítáme" množinu stop slov.
+
+Naopak, odstranění vulgární\index{slova!vulgarismy} nebo jinak nevhodných slov%
+\index{slova!nevhodná} lze doporučit, ať
+už jen z pragmatického důvodu určité serióznosti analýzy a na ní postavené
+webové aplikace\index{aplikace!\texttt{the\_next\_word\_prediction}}.
+Seznamů nevhodných slov\index{slova!nevhodná} (\textit{swear words lists},
+\textit{profanity filters}) je online celá řada, např.
+\href{http://www.bannedwordlist.com/}{zde}.
+
+Kromě nevhodných slov byly odstraněny ještě číslice, neboť jejich význam
+v~dané větě je pouze kontextový; jsou-li číselné prvky součástí idiomatické
+fráze, u~které máme dozajista zájem, aby byla součástí $n$-gramu\index{$n$-gram}, bude takový
+číselný prvek pravděpodobně vyjádřen číslovkou (slovem).
+
+
+\subsection{$n$-gramming}
+
+Vstupem pro $n$-gramming\index{$n$-gram} je uspořádaná $k$-tice slov, která reprezentuje
+$k$-slovnou větu. Korpus\index{korpus} je pak složen z nějakého (obvykle velkého) množství
+takto reprezentovaných vět. $n$-gramem\index{$n$-gram} rozumíme $n$-člennou sekvenci po sobě
+jsoucích slov některé $k$-slovné věty, přičemž předpokládáme, že $n \leq k$.
+
+Snadno nahlédneme, že počet $n$-gramů, které můžeme získat z $k$-slovné věty,
+je roven $\epsilon(n, k)$ tak, že
+
+\begin{equation*}
+  \epsilon(n, k) = \left\{
+  \begin{array}{rr}
+  k - n + 1,  & n \leq k, \\
+          0,  & n > k.
+  \end{array} \right.
+\end{equation*}
+
+Algoritmus\index{algoritmus}, který z korpusu\index{korpus} získá všechny $n$-gramy,
+je relativně jednoduchý.
+V~podstatě každou větu korpusu reprezentovanou uspořádaným seznamem slov
+proscanuje "čtecím okénkem" délky $n$ (slov)\index{slova} a vždy takové $n$-členné slovní
+spojení uloží do postupně rostoucího seznamu $n$-gramů\index{$n$-gram}.
+
+Je-li v korpusu\index{korpus} $l$ vět a je-li průměrná délka jedné věty $k$ slov, kde
+$k \geq n$, pak průměrná časová složitost algoritmu\index{výpočetní čas!nelineární} je asymptoticky
+$\Theta(l(k - n + 1)) = \Theta(kl-nl)$, tedy s rostoucím $n$ klesá.
+
+Nad seznamem $n$-gramů\index{$n$-gram} lze vytvořit tabulka jejich frekvencí%
+\index{$n$-gram!tabulka četností}; relativní
+frekvenci $n$-gramu pak můžeme chápat jako bodový odhad pravděpodobnosti\index{pravděpodobnost}%
+\index{pravděpodobnost!odhad},
+s jakou se daný $n$-gram\index{$n$-gram} vyskytuje v obecném\footnote{Pokud by byl $n$-gramming%
+\index{$n$-gram}
+prováděn nad zpracovaným korpusem, který byl silně monotématický či doménově
+velmi specifický, pak relativní frekvence $n$-gramu bodově odhaduje
+pravděpodobnost výskytu takového $n$-členného slovního spojení v textu
+omezeném daným tématem či doménou.} rozsáhlém textu příslušného
+přirozeného jazyka. Pro $n = 1$ získáme \textit{unigramy}\index{$n$-gram!unigram}, neboli jednotlivá
+slova. Pro $n = \{2, 3, 4, 5\}$ hovoříme postupně o \textit{bigramech}\index{$n$-gram!bigram},
+\textit{trigramech}\index{$n$-gram!trigram}, \textit{quadriramech}%
+\index{$n$-gram!quadrigram}, \textit{pentagramech}\index{$n$-gram!pentagram}, respektive.
+
+Seznamy $n$-gramů pro $\forall n = \{2, 3, 4, 5\}$ řeší implementovaná
+funkce \texttt{getNGrams()}, viz též~\ref{helper_functions}~a~\ref{n_gramming},
+jejímž vstupem je jednak $n$, jednak věta reprezentovaná jako uspořádaná
+$k$-tice slov. Výstupem jsou všechny $n$-gramy\index{$n$-gram}, které lze ze vstupní věty
+získat. Skript \texttt{n\_gramming.R}~\ref{n_gramming} rovněž počítá tabulky
+frekvencí\index{$n$-gram!tabulka četností} pro jednotlivé $n$-gramy.
+
+Výstup z procedury \texttt{n\_gramming.R} pro $n = 2$, tedy bigramy\index{$n$-gram!bigram}, je
+naznačen v~komponentě~\ref{bigram}, která slouží zároveň i jako vstup pro
+aplikaci predikující nejpravděpodobnější\index{pravděpodobnost} $n$-té slovo\index{$n$-té slovo}
+následující za vloženou
+$(n - 1)$-člennou frází\index{$(n - 1)$-členná fráze}.
+Aplikace pochopitelně používá i $n$-grammy\index{$n$-gram} vyšších
+řádů (pro vyšší $n$), viz dále. Pro $n = 3$ je přehled některých trigramů
+získaných $n$-grammingem nad částmi helsinských korpusů uveden
+v tabulce~\ref{trigramy}. Pro ostatní $n$ získáme obdobné tabulky.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lclr}
+    \hline
+    $n$-gram & první $(n-1)$-podřetězec & $n$-té slovo & frekvence \\
+    \hline
+    out of here & out of & here & 3 \\
+    out of his & out of & his & 8 \\
+    out of it & out of & it & 9 \\
+    out of my & out of & my & 11 \\
+    out of our & out of & our & 2 \\
+    out of school & out of & school & 3 \\
+    \hline
+\end{tabular}
+\captionsetup{width = 0.77\textwidth}
+\caption{Několik vybraných $n$-gramů pro $n = 3$ (tedy trigramů) %
+         první $(n-1)$-podřetězec $n$-gramu\index{$n$-gram}, jeho $n$-té slovo %
+         a~absolutní frekvence\index{$n$-gram!tabulka četností} získaná $n$-gramingem %
+         části helsinských\index{korpus!helsinský} korpusů\label{trigramy}}
+\end{table}
+
+
+
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+

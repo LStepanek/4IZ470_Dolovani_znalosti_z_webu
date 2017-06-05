@@ -1,0 +1,143 @@
+\begin{theindex}
+
+  \item $(n - 1)$-\IeC {\v c}lenn\IeC {\'a} fr\IeC {\'a}ze, 
+		\hyperpage{5}, \hyperpage{14--18}
+  \item $n$-gram, \hyperpage{5--7}, \hyperpage{11--16}, \hyperpage{18}
+    \subitem bigram, \hyperpage{14}, \hyperpage{17}
+    \subitem pentagram, \hyperpage{14}
+    \subitem quadrigram, \hyperpage{14}
+    \subitem tabulka \IeC {\v c}etnost\IeC {\'\i }, \hyperpage{7}, 
+		\hyperpage{14--16}, \hyperpage{18}
+    \subitem trigram, \hyperpage{14}, \hyperpage{17}
+    \subitem unigram, \hyperpage{14--16}
+  \item $n$-t\IeC {\'e} slovo, \hyperpage{5}, \hyperpage{8}, 
+		\hyperpage{14, 15}, \hyperpage{18}
+    \subitem predikce, \hyperpage{15, 16}
+      \subsubitem back-off, \hyperpage{15}, \hyperpage{17}
+  \item \IeC {\'u}loha
+    \subitem asynchronn\IeC {\'\i }, \hyperpage{9}, \hyperpage{15}, 
+		\hyperpage{18}
+    \subitem synchronn\IeC {\'\i }, \hyperpage{18}
+  \item \IeC {\v c}\IeC {\'\i }slovka, \hyperpage{10}
+  \item \IeC {\v c}len \textit{the}, \hyperpage{15, 16}
+  \item \textsf{R}, \hyperpage{5}, \hyperpage{9, 10}, 
+		\hyperpage{15, 16}
+  \item \texttt{Shiny}, \hyperpage{15--17}
+
+  \indexspace
+
+  \item algoritmus, \hyperpage{7}, \hyperpage{10, 11}, \hyperpage{13}
+    \subitem greedy, \hyperpage{10}
+    \subitem maximum aposteriori, \hyperpage{15, 16}
+  \item anal\IeC {\'y}za, \hyperpage{6}
+    \subitem sentimentu, \hyperpage{13}
+  \item angli\IeC {\v c}tina, \hyperpage{6, 7}, \hyperpage{10}, 
+		\hyperpage{18}
+  \item aplikace
+    \subitem \texttt{the\_next\_word\_prediction}, \hyperpage{8}, 
+		\hyperpage{13}, \hyperpage{15, 16}
+
+  \indexspace
+
+  \item CSS, \hyperpage{10}, \hyperpage{16, 17}
+
+  \indexspace
+
+  \item graf
+    \subitem orientovan\IeC {\'y}, \hyperpage{11}
+
+  \indexspace
+
+  \item hashtag, \hyperpage{12}
+  \item HTML, \hyperpage{10}, \hyperpage{16, 17}
+    \subitem entita, \hyperpage{10}
+    \subitem klauzule, \hyperpage{10}
+    \subitem tag, \hyperpage{10}
+
+  \indexspace
+
+  \item interpunkce, \hyperpage{7}
+
+  \indexspace
+
+  \item javascript, \hyperpage{10}
+  \item jazyk
+    \subitem analytick\IeC {\'y}, \hyperpage{6}
+    \subitem Chomsk\IeC {\'e}ho hierarchie, \hyperpage{10}
+    \subitem flek\IeC {\v c}n\IeC {\'\i }, \hyperpage{7}
+    \subitem metajazyk, \hyperpage{10}
+
+  \indexspace
+
+  \item k\IeC {\'o}dov\IeC {\'a}n\IeC {\'\i }
+    \subitem UTF-8, \hyperpage{12}
+  \item korpus, \hyperpage{6, 7}, \hyperpage{9}, \hyperpage{11}, 
+		\hyperpage{13--15}, \hyperpage{18}
+    \subitem British National Corpus, \hyperpage{9}
+    \subitem Corpus of Contemporary American English, \hyperpage{9}
+    \subitem helsinsk\IeC {\'y}, \hyperpage{7}, \hyperpage{9}, 
+		\hyperpage{14}
+
+  \indexspace
+
+  \item lemmatizace, \hyperpage{6, 7}
+  \item link
+    \subitem farm sink, \hyperpage{11}
+    \subitem intern\IeC {\'\i }, \hyperpage{10}
+    \subitem outlink, \hyperpage{11}
+    \subitem webov\IeC {\'y}, \hyperpage{10}
+
+  \indexspace
+
+  \item mezera
+    \subitem leading, \hyperpage{12}
+    \subitem traling, \hyperpage{12}
+  \item morfematika, \hyperpage{6, 7}
+
+  \indexspace
+
+  \item pravd\IeC {\v e}podobnost, \hyperpage{14, 15}, \hyperpage{18}
+    \subitem odhad, \hyperpage{14, 15}
+  \item processing, \hyperpage{9}, \hyperpage{15}
+    \subitem natural language processing, \hyperpage{6}, \hyperpage{9}
+    \subitem preprocessing, \hyperpage{7}, \hyperpage{9}, 
+		\hyperpage{12}
+
+  \indexspace
+
+  \item regul\IeC {\'a}rn\IeC {\'\i } v\IeC {\'y}raz, 
+		\hyperpage{10--12}
+
+  \indexspace
+
+  \item slova, \hyperpage{13--15}
+    \subitem nevhodn\IeC {\'a}, \hyperpage{7}, \hyperpage{13}
+    \subitem stop slova, \hyperpage{7}, \hyperpage{13}
+    \subitem vulgarismy, \hyperpage{7}, \hyperpage{13}
+  \item sorting, \hyperpage{12}
+
+  \indexspace
+
+  \item tokenizace, \hyperpage{7}, \hyperpage{12, 13}
+
+  \indexspace
+
+  \item URL, \hyperpage{10}
+
+  \indexspace
+
+  \item v\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } \IeC {\v c}as
+    \subitem line\IeC {\'a}rn\IeC {\'\i }, \hyperpage{12}
+    \subitem neline\IeC {\'a}rn\IeC {\'\i }, \hyperpage{12}, 
+		\hyperpage{14}
+  \item vyhlazov\IeC {\'a}n\IeC {\'\i }
+    \subitem Kneser-Neyovo, \hyperpage{16}, \hyperpage{18}
+    \subitem Laplaceovo (add-one), \hyperpage{16}
+
+  \indexspace
+
+  \item webscraping, \hyperpage{7}, \hyperpage{9--11}
+  \item Wikipedie, \hyperpage{7}, \hyperpage{9--11}
+    \subitem tag, \hyperpage{10}
+
+\end{theindex}

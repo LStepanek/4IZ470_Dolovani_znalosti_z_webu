@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% definuji třídu a vlastnosti dokumentu jako celku ---------------------------
+\documentclass[
+  a4paper,
+  12pt,
+  twoside
+]{article}
+
+%% vkládám své vlastní styly, knihovny, některé globální parametry ------------
+\input{my_styles.tex}
+
+%% začínám dokument -----------------------------------------------------------
+\begin{document}
+
+%% vkládám úvodní stranu ------------------------------------------------------
+\input{sections/title_page.tex}
+
+%% vkládám kolofón ------------------------------------------------------------
+\input{sections/colophon_page.tex}
+\clearpage
+
+%% stránka s obsahem ----------------------------------------------------------
+\input{sections/content_page.tex}
+
+%% následuje blank page -------------------------------------------------------
+\input{sections/blank_page.tex}
+
+%% stránka s úvodem -----------------------------------------------------------
+\input{sections/introduction.tex}
+
+%% metody zpracování jazyka ---------------------------------------------------
+\input{sections/workflow.tex}
+
+%% metody zpracování jazyka ---------------------------------------------------
+\input{sections/text_processing_methods.tex}
+
+%% webová aplikace ------------------------------------------------------------
+\input{sections/web_application.tex}
+
+%% závěr ----------------------------------------------------------------------
+\input{sections/conclusion.tex}
+
+%% reference ------------------------------------------------------------------
+\section{Literatura}
+\printbibliography[heading = none]
+\newpage
+
+%% rejstřík -------------------------------------------------------------------
+\input{sections/index.tex}
+
+%% Apendix --------------------------------------------------------------------
+\input{sections/appendix.tex}
+
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+

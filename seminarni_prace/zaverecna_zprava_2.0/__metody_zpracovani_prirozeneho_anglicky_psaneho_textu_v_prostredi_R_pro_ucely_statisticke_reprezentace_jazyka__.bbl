@@ -1,0 +1,344 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{none/global/}
+    \entry{Gorblach1991}{book}{}
+      \name{author}{1}{}{%
+        {{hash=bbdc39d500febefffc211db274b9a84b}{%
+           family={Görlach},
+           familyi={G\bibinitperiod},
+           given={Manfred},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{bbdc39d500febefffc211db274b9a84b}
+      \strng{fullhash}{bbdc39d500febefffc211db274b9a84b}
+      \strng{authornamehash}{bbdc39d500febefffc211db274b9a84b}
+      \strng{authorfullhash}{bbdc39d500febefffc211db274b9a84b}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0521325293}
+      \field{title}{Introduction to Early Modern English}
+      \field{year}{1991}
+    \endentry
+    \entry{Manning1999}{book}{}
+      \name{author}{2}{}{%
+        {{hash=ff4377244c68b8beb3253e53d6387f94}{%
+           family={Manning},
+           familyi={M\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=649b7399037d78a25778825cfd63a4ba}{%
+           family={Schuetze},
+           familyi={S\bibinitperiod},
+           given={Hinrich},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {The MIT Press}%
+      }
+      \strng{namehash}{277f440232a144db7bbd1c3dc35dbc7c}
+      \strng{fullhash}{277f440232a144db7bbd1c3dc35dbc7c}
+      \strng{authornamehash}{277f440232a144db7bbd1c3dc35dbc7c}
+      \strng{authorfullhash}{277f440232a144db7bbd1c3dc35dbc7c}
+      \field{sortinit}{2}
+      \field{sortinithash}{0aa614ace9f3a40ef5a67e7f7a184048}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-262-13360-1}
+      \field{title}{Foundations of Statistical Natural Language Processing}
+      \field{year}{1999}
+    \endentry
+    \entry{Rlanguage}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=a902f7a1275f47f57554b7ea75ccd0bc}{%
+           family={{R Core Team}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Vienna, Austria}%
+      }
+      \list{organization}{1}{%
+        {R Foundation for Statistical Computing}%
+      }
+      \strng{namehash}{a902f7a1275f47f57554b7ea75ccd0bc}
+      \strng{fullhash}{a902f7a1275f47f57554b7ea75ccd0bc}
+      \strng{authornamehash}{a902f7a1275f47f57554b7ea75ccd0bc}
+      \strng{authorfullhash}{a902f7a1275f47f57554b7ea75ccd0bc}
+      \field{sortinit}{3}
+      \field{sortinithash}{197da6d6c34c6b20ce45c4d4baace5a4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{R: A Language and Environment for Statistical Computing}
+      \field{year}{2016}
+      \verb{url}
+      \verb https://www.R-project.org/
+      \endverb
+    \endentry
+    \entry{Davies2010}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bbf14f233ffa3419dda9df2e879c1e8d}{%
+           family={Davies},
+           familyi={D\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press ({OUP})}%
+      }
+      \strng{namehash}{bbf14f233ffa3419dda9df2e879c1e8d}
+      \strng{fullhash}{bbf14f233ffa3419dda9df2e879c1e8d}
+      \strng{authornamehash}{bbf14f233ffa3419dda9df2e879c1e8d}
+      \strng{authorfullhash}{bbf14f233ffa3419dda9df2e879c1e8d}
+      \field{sortinit}{4}
+      \field{sortinithash}{d221becdd544034cf9082056cd6e6d2d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Literary and Linguistic Computing}
+      \field{month}{10}
+      \field{number}{4}
+      \field{title}{The Corpus of Contemporary American English as the first reliable monitor corpus of English}
+      \field{volume}{25}
+      \field{year}{2010}
+      \field{pages}{447\bibrangedash 464}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1093/llc/fqq018
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/llc/fqq018
+      \endverb
+    \endentry
+    \entry{Landow1993}{incollection}{}
+      \name{author}{1}{}{%
+        {{hash=789053932c31898fe0a78aab7b7036c7}{%
+           family={Clear},
+           familyi={C\bibinitperiod},
+           given={Jeremy\bibnamedelima H.},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=e23ad4e66db0d4abd847fae1598fac03}{%
+           family={Landow},
+           familyi={L\bibinitperiod},
+           given={George\bibnamedelima P.},
+           giveni={G\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=2c1b83c963b1e6f859cbce2b91119af2}{%
+           family={Delany},
+           familyi={D\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, MA, USA}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{789053932c31898fe0a78aab7b7036c7}
+      \strng{fullhash}{789053932c31898fe0a78aab7b7036c7}
+      \strng{authornamehash}{789053932c31898fe0a78aab7b7036c7}
+      \strng{authorfullhash}{789053932c31898fe0a78aab7b7036c7}
+      \strng{editornamehash}{8d2e54b099103567c7ea5b6a4f6cfa31}
+      \strng{editorfullhash}{8d2e54b099103567c7ea5b6a4f6cfa31}
+      \field{sortinit}{5}
+      \field{sortinithash}{c9df3c9fb8f555dd9201cedc5e343021}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{chapter}{The British National Corpus}
+      \field{isbn}{0-262-12176-x}
+      \field{title}{The Digital Word}
+      \field{year}{1993}
+      \field{pages}{163\bibrangedash 187}
+      \range{pages}{25}
+      \verb{url}
+      \verb http://dl.acm.org/citation.cfm?id=166403.166418
+      \endverb
+    \endentry
+    \entry{Kytoo1996}{book}{}
+      \name{author}{1}{}{%
+        {{hash=0c7d47d778d0316fabc8d718ae5fdfcc}{%
+           family={Kytö},
+           familyi={K\bibinitperiod},
+           given={Merja},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Helsinki}%
+      }
+      \list{publisher}{1}{%
+        {Dept. of English, University of Helsinki}%
+      }
+      \strng{namehash}{0c7d47d778d0316fabc8d718ae5fdfcc}
+      \strng{fullhash}{0c7d47d778d0316fabc8d718ae5fdfcc}
+      \strng{authornamehash}{0c7d47d778d0316fabc8d718ae5fdfcc}
+      \strng{authorfullhash}{0c7d47d778d0316fabc8d718ae5fdfcc}
+      \field{sortinit}{6}
+      \field{sortinithash}{02bbed3ed82f61ae046619460488516d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{951-45-7470-2}
+      \field{title}{Manual to the diachronic part of the Helsinki corpus of English texts : coding conventions and lists of source texts}
+      \field{year}{1996}
+    \endentry
+    \entry{Chomsky1956}{article}{}
+      \name{author}{1}{}{%
+        {{hash=ea438a0cfd4624548e5e3ed26590c3fc}{%
+           family={Chomsky},
+           familyi={C\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Institute of Electrical}%
+        {Electronics Engineers ({IEEE})}%
+      }
+      \strng{namehash}{ea438a0cfd4624548e5e3ed26590c3fc}
+      \strng{fullhash}{ea438a0cfd4624548e5e3ed26590c3fc}
+      \strng{authornamehash}{ea438a0cfd4624548e5e3ed26590c3fc}
+      \strng{authorfullhash}{ea438a0cfd4624548e5e3ed26590c3fc}
+      \field{sortinit}{7}
+      \field{sortinithash}{6ac7fe70cdec8cba8f65694411ce2532}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{{IEEE} Transactions on Information Theory}
+      \field{month}{9}
+      \field{number}{3}
+      \field{title}{Three models for the description of language}
+      \field{volume}{2}
+      \field{year}{1956}
+      \field{pages}{113\bibrangedash 124}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/tit.1956.1056813
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1109/tit.1956.1056813
+      \endverb
+    \endentry
+    \entry{Saif2014}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=854fbdf40443b81862feceff966b0b22}{%
+           family={Saif},
+           familyi={S\bibinitperiod},
+           given={Hassan},
+           giveni={H\bibinitperiod}}}%
+        {{hash=462d87942086f19e5053c4acdda8472e}{%
+           family={Fernández},
+           familyi={F\bibinitperiod},
+           given={Miriam},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f3b78337b03e473fdd1fe07b5b127389}{%
+           family={He},
+           familyi={H\bibinitperiod},
+           given={Yulan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=5d03c943427ee704962d8d883cc87264}{%
+           family={Alani},
+           familyi={A\bibinitperiod},
+           given={Harith},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{59fe42594392e38ca33891b408240182}
+      \strng{fullhash}{4f07e85c725c95d8ffde83f360667803}
+      \strng{authornamehash}{59fe42594392e38ca33891b408240182}
+      \strng{authorfullhash}{4f07e85c725c95d8ffde83f360667803}
+      \field{sortinit}{8}
+      \field{sortinithash}{2f1b0e69e7617f99664f1cd00bb9603c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The 9th International Conference on Language Resources and Evaluation}
+      \field{title}{On stopwords, filtering and data sparsity for sentiment analysis of twitter}
+      \field{year}{2014}
+    \endentry
+    \entry{Chen1996}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=65f24792d2e9628dff05198810fff395}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Stanley\bibnamedelima F.},
+           giveni={S\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=cff3ac3b4d16dde2f682dce454449cff}{%
+           family={Goodman},
+           familyi={G\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Santa Cruz, California}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{f94aa3ad04d323712124a2900738ea8a}
+      \strng{fullhash}{f94aa3ad04d323712124a2900738ea8a}
+      \strng{authornamehash}{f94aa3ad04d323712124a2900738ea8a}
+      \strng{authorfullhash}{f94aa3ad04d323712124a2900738ea8a}
+      \field{sortinit}{9}
+      \field{sortinithash}{2999ebab86052e6d71b434385f8b4ed2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 34th Annual Meeting on Association for Computational Linguistics}
+      \field{series}{ACL '96}
+      \field{title}{An Empirical Study of Smoothing Techniques for Language Modeling}
+      \field{year}{1996}
+      \field{pages}{310\bibrangedash 318}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.3115/981863.981904
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.3115/981863.981904
+      \endverb
+    \endentry
+    \entry{Jurafsky2009}{book}{}
+      \name{author}{1}{}{%
+        {{hash=3147296c99a3f829087becd1a4eaec08}{%
+           family={Jurafsky},
+           familyi={J\bibinitperiod},
+           given={Dan},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Upper Saddle River, N.J}%
+      }
+      \list{publisher}{1}{%
+        {Pearson Prentice Hall}%
+      }
+      \strng{namehash}{3147296c99a3f829087becd1a4eaec08}
+      \strng{fullhash}{3147296c99a3f829087becd1a4eaec08}
+      \strng{authornamehash}{3147296c99a3f829087becd1a4eaec08}
+      \strng{authorfullhash}{3147296c99a3f829087becd1a4eaec08}
+      \field{sortinit}{1}
+      \field{sortinithash}{27a2bc5dfb9ed0a0422134d636544b5d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0131873216}
+      \field{title}{Speech and language processing : an introduction to natural language processing, computational linguistics, and speech recognition}
+      \field{year}{2009}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

@@ -1,0 +1,32 @@
+\BOOKMARK [1][-]{section.1}{\332vod}{}% 1
+\BOOKMARK [1][-]{section.2}{Workflow z\355sk\341n\355 a zpracov\341n\355 textu}{}% 2
+\BOOKMARK [1][-]{section.3}{Metody z\355sk\341n\355 a zpracov\341n\355 textu}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Z\355sk\341n\355 korpusu}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Webscraping}{section.3}% 5
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Webscraping anglick\351 Wikipedie}{subsection.3.2}% 6
+\BOOKMARK [2][-]{subsection.3.3}{Delen\355 textu do vet}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.4}{Preprocessing textu}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.5}{Tokenizace}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.6}{Odstranen\355 stop slov a dal\235\355ch}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.7}{n-gramming}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Aplikace the\137next\137word\137prediction}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Princip aplikace}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Komponenty aplikace}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Z\341ver a dal\235\355 mo\236n\351 smerov\341n\355 pr\341ce}{}% 15
+\BOOKMARK [1][-]{section.6}{Literatura}{}% 16
+\BOOKMARK [1][-]{section.7}{Rejstr\355k}{}% 17
+\BOOKMARK [1][-]{section.8}{Apendix}{}% 18
+\BOOKMARK [2][-]{subsection.8.1}{Procedura \137\137main\137\137.R}{section.8}% 19
+\BOOKMARK [2][-]{subsection.8.2}{Procedura initialization.R}{section.8}% 20
+\BOOKMARK [2][-]{subsection.8.3}{Funkce helper\137functions.R}{section.8}% 21
+\BOOKMARK [2][-]{subsection.8.4}{Procedura webscraping.R}{section.8}% 22
+\BOOKMARK [2][-]{subsection.8.5}{Procedura corpora\137loading.R}{section.8}% 23
+\BOOKMARK [2][-]{subsection.8.6}{Procedura text\137splitting.R}{section.8}% 24
+\BOOKMARK [2][-]{subsection.8.7}{Procedura preprocessing.R}{section.8}% 25
+\BOOKMARK [2][-]{subsection.8.8}{Procedura tokenization.R}{section.8}% 26
+\BOOKMARK [2][-]{subsection.8.9}{Procedura postprocessing.R}{section.8}% 27
+\BOOKMARK [2][-]{subsection.8.10}{Procedura n\137gramming.R}{section.8}% 28
+\BOOKMARK [2][-]{subsection.8.11}{Komponenta ui.R}{section.8}% 29
+\BOOKMARK [2][-]{subsection.8.12}{Komponenta server.R}{section.8}% 30
+\BOOKMARK [2][-]{subsection.8.13}{Komponenta www/style.css}{section.8}% 31
+\BOOKMARK [2][-]{subsection.8.14}{Komponenta my\1371\137word\137vocabulary.txt}{section.8}% 32

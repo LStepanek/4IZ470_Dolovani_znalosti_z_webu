@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Závěr a další možné směřování práce}
+
+Byla vytvořena "pipeline" zpracování textu přirozeného analytického jazyka,
+konkrétně angličtiny\index{angličtina}, a základní model statistické reprezentace
+korpusu \index{korpus}
+daného jazyka, tedy $n$-gramming\index{$n$-gram} pro $n \in \{2, 3, 4, 5\}$.
+Ve všech výše
+uvedených případech jde o asynchronní úlohy\index{úloha!asynchronní}, které je
+možné "předpočítat" dopředu.
+
+Rovněž byla implementována webová aplikace, která staví na extrahovaných
+\mbox{$n$-gramech}\index{$n$-gram} a predikuje ($n$-té) slovo\index{$n$-té slovo},
+které s největší pravděpodobností
+následuje $(n - 1)$-člennou frázi\index{$(n - 1)$-členná fráze}, kterou zadává
+uživatel aplikace. Zde
+se již jedná o "on-the-fly" úlohu\index{úloha!synchronní}, která musí proběhnout
+takřka v reálném
+čase (uživatel v podstatě nesmí čekat).
+
+Princip, který aplikace využívá, je obdobou různých našeptávačů v messaging
+aplikacích a v prohlížečích, kdy různé formy pop-up našeptávačů nabízejí
+uživateli okamžité možnosti toho, jaké slovo se s velkou pravděpodobností%
+\index{pravděpodobnost}
+nabízí jako vhodné (kontextové) pokračování slovní fráze, kterou do textového
+pole již zadal.
+
+Do budoucna se nabízí eventuální vytvoření $n$-gramů pro vyšší $n$.
+Zároveň je možné implementovat Kneser-Neyovo vyhlazování\index{vyhlazování!Kneser-Neyovo},
+které balancuje
+rozdíly mezi \mbox{$n$-gramy}\index{$n$-gram} a jejich kontextem pro malá a velká $n$.
+V aplikaci
+je možné nechat vypsat nikoliv jen první a nejpravděpodobnější slovo
+následující po zadané $(n - 1)$-členné frázi\index{$(n - 1)$-členná fráze},
+ale vypsat těchto pravděpodobných\index{$n$-gram!tabulka četností}
+slov hned několik a řadit je sestupně dle pravděpodobnosti\index{pravděpodobnost}.
+
+
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
